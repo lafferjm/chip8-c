@@ -10,6 +10,4 @@ typedef struct video {
 
 Video init_video();
 
-void clear_screen(Video*);
-
 #endif
