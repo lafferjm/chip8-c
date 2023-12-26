@@ -19,7 +19,7 @@ int main(int argc, char** argv) {
     Video video = init_video();
     
     CPU cpu;
-    cpu.pc = 0x200;
+    init_cpu(&cpu);
 
     load_font(&cpu);
     load_rom(argv[1], &cpu);
@@ -31,7 +31,7 @@ int main(int argc, char** argv) {
     while(running == false) { 
         opcode = fetch_opcode(&cpu);
         cpu.pc += 2;
-    
+
         switch (opcode & 0xF000) {
             case 0x0000:
                 clear_screen(&video);
@@ -48,15 +48,21 @@ int main(int argc, char** argv) {
             case 0xA000:
                 set_index_register(&cpu, opcode);
                 break;
+            case 0xD000:
+                display(&cpu, opcode);
+                update_display(&video, cpu.display);
+                break;
         }
 
-        printf("0x%04x\n", opcode);
+        // printf("0x%04x\n", opcode);
     
         while(SDL_PollEvent(&e)) {
             if (e.type == SDL_QUIT) {
                 running = true;
             }
         }
+
+        SDL_Delay(1000/60);
     }
 
     SDL_DestroyWindow(video.window);

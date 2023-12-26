@@ -16,5 +16,6 @@ typedef struct cpu {
 } CPU;
 
 uint16_t fetch_opcode(CPU*);
+void init_cpu(CPU*);
 
 #endif

@@ -6,8 +6,10 @@
 typedef struct video {
     SDL_Window* window;
     SDL_Surface* surface;
+    SDL_Renderer* renderer;
 } Video;
 
 Video init_video();
+void update_display(Video*, uint32_t*);
 
 #endif

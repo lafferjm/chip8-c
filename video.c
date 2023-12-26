@@ -9,6 +9,7 @@ Video init_video() {
     Video video;
     video.window = NULL;
     video.surface =  NULL;
+    video.renderer = NULL;
 
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {
         printf("SDL could not initialize! SDL_Error: %s\n", SDL_GetError());
@@ -27,10 +28,36 @@ Video init_video() {
         printf("Window could not be created!: %s", SDL_GetError());
         exit(-1);
     }
-
-    video.surface = SDL_GetWindowSurface(video.window);
-    SDL_FillRect(video.surface, NULL, SDL_MapRGB(video.surface->format, 0x00, 0x00, 0x00));
-    SDL_UpdateWindowSurface(video.window);
     
+    video.renderer = SDL_CreateRenderer(video.window, -1, SDL_RENDERER_ACCELERATED);
+
+    if(video.renderer == NULL) {
+        printf("Renderer could not be created! SDL Error: %s\n", SDL_GetError());
+        exit(-1);
+    }
+
+    SDL_SetRenderDrawColor(video.renderer, 00, 0x00, 0x00, 0xFF);
+    SDL_RenderClear(video.renderer);
+
     return video;
+}
+
+void update_display(Video* video, uint32_t* display) {
+    SDL_Rect rect;
+
+    for (unsigned int x = 0; x < 64; x++) {
+        for (unsigned int y = 0; y < 32; y++) {
+            if (display[x + y * 64]) {
+                rect.x = x * 16;
+                rect.y = y * 16;
+                rect.w = 16;
+                rect.h = 16;
+            }
+
+            SDL_SetRenderDrawColor(video->renderer, 0xFF, 0xFF, 0xFF, 0xFF);
+            SDL_RenderFillRect(video->renderer, &rect);
+        }
+    }
+
+    SDL_RenderPresent(video->renderer);
 }
