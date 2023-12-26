@@ -2,64 +2,15 @@
 #include <stdint.h>
 #include <stdlib.h>
 
-const unsigned short FONT_SIZE = 80;
-
-struct CPU {
-    uint8_t memory[4096];
-    uint32_t display[64*32];
-    uint16_t pc;
-    uint16_t index;
-    uint16_t stack[16];
-    uint8_t sp;
-    uint8_t delay_timer;
-    uint8_t sound_timer;
-};
-
-const uint8_t FONT_SET[FONT_SIZE] = {
-    0xF0, 0x90, 0x90, 0x90, 0xF0, // 0
-    0x20, 0x60, 0x20, 0x20, 0x70, // 1
-    0xF0, 0x10, 0xF0, 0x80, 0xF0, // 2
-    0xF0, 0x10, 0xF0, 0x10, 0xF0, // 3
-    0x90, 0x90, 0xF0, 0x10, 0x10, // 4
-    0xF0, 0x80, 0xF0, 0x10, 0xF0, // 5
-    0xF0, 0x80, 0xF0, 0x90, 0xF0, // 6
-    0xF0, 0x10, 0x20, 0x40, 0x40, // 7
-    0xF0, 0x90, 0xF0, 0x90, 0xF0, // 8
-    0xF0, 0x90, 0xF0, 0x10, 0xF0, // 9
-    0xF0, 0x90, 0xF0, 0x90, 0x90, // A
-    0xE0, 0x90, 0xE0, 0x90, 0xE0, // B
-    0xF0, 0x80, 0x80, 0x80, 0xF0, // C
-    0xE0, 0x90, 0x90, 0x90, 0xE0, // D
-    0xF0, 0x80, 0xF0, 0x80, 0xF0, // E
-    0xF0, 0x80, 0xF0, 0x80, 0x80  // F
-};
+#include "chip8.h"
+#include "cpu.h"
 
 int main(int argc, char** argv) {
-    struct CPU cpu;
-
-    for (int i = 0; i < FONT_SIZE; i++) {
-        cpu.memory[i] = FONT_SET[i];
-    }
+    CPU cpu;
+    load_font(&cpu);
+    load_rom("roms/ibm_logo.ch8", &cpu);
 
     cpu.pc = 0x200;
 
-    FILE *fp = fopen("roms/ibm_logo.ch8", "rb");
-    if (fp == NULL) {
-        printf("Error reading file");
-        return -1;
-    }
-
-    long rom_length;
-    uint8_t *rom_buffer;
-
-    fseek(fp, 0, SEEK_END);
-    rom_length = ftell(fp);
-    fseek(fp, 0, SEEK_SET);
-
-    rom_buffer = malloc(sizeof(uint8_t) * rom_length);
-    fread(rom_buffer, sizeof(uint8_t), rom_length, fp);
-
-    for (int i = 0; i < rom_length; i++) {
-        cpu.memory[i + 0x200] = rom_buffer[i];
-    }
+    
 }
