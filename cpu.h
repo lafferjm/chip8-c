@@ -14,4 +14,6 @@ typedef struct cpu {
     uint8_t sound_timer;
 } CPU;
 
+uint16_t fetch_opcode(CPU*);
+
 #endif

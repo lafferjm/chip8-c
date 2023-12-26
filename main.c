@@ -23,7 +23,7 @@ int main(int argc, char** argv) {
     load_font(&cpu);
     load_rom(argv[1], &cpu);
 
-    uint16_t opcode = (cpu.memory[cpu.pc] << 8) | cpu.memory[cpu.pc + 1];
+    uint16_t opcode = fetch_opcode(&cpu);
     cpu.pc += 2;
     
     printf("0x%04x", opcode);
