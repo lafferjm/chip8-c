@@ -39,11 +39,23 @@ int main(int argc, char** argv) {
             case 0x1000:
                 jump(&cpu, opcode);
                 break;
+            case 0x3000:
+                skip_if_equal_value(&cpu, opcode);
+                break;
+            case 0x4000:
+                skip_if_not_equal_value(&cpu, opcode);
+                break;
+            case 0x5000:
+                skip_if_equal_registers(&cpu, opcode);
+                break;
             case 0x6000:
                 set_register(&cpu, opcode);
                 break;
             case 0x7000:
                 add_to_register(&cpu, opcode);
+                break;
+            case 0x9000:
+                skip_if_not_equal_registers(&cpu, opcode);
                 break;
             case 0xA000:
                 set_index_register(&cpu, opcode);

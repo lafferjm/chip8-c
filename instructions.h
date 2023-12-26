@@ -11,4 +11,9 @@ void add_to_register(CPU*, uint16_t);
 void set_index_register(CPU*, uint16_t);
 void display(CPU*, uint16_t);
 
+void skip_if_equal_value(CPU*, uint16_t);
+void skip_if_not_equal_value(CPU*, uint16_t);
+void skip_if_equal_registers(CPU*, uint16_t);
+void skip_if_not_equal_registers(CPU*, uint16_t);
+
 #endif

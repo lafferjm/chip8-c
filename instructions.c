@@ -58,3 +58,39 @@ void display(CPU* cpu, uint16_t opcode) {
         }
     }
 }
+
+void skip_if_equal_value(CPU* cpu, uint16_t opcode) {
+    uint8_t vx = (opcode & 0x0F00) >> 8;
+    uint8_t value = opcode & 0x00FF;
+
+    if (cpu->registers[vx] == value) {
+        cpu->pc += 2;
+    }
+}
+
+void skip_if_not_equal_value(CPU* cpu, uint16_t opcode) {
+    uint8_t vx = (opcode & 0x0F00) >> 8;
+    uint8_t value = opcode & 0x00FF;
+
+    if (cpu->registers[vx] != value) {
+        cpu->pc += 2;
+    }
+}
+
+void skip_if_equal_registers(CPU* cpu, uint16_t opcode) {
+    uint8_t vx = (opcode & 0x0F00) >> 8;
+    uint8_t vy = (opcode & 0x00F0) >> 4;
+
+    if (cpu->registers[vx] == cpu->registers[vy]) {
+        cpu->pc += 2;
+    }
+}
+
+void skip_if_not_equal_registers(CPU* cpu, uint16_t opcode) {
+    uint8_t vx = (opcode & 0x0F00) >> 8;
+    uint8_t vy = (opcode & 0x00F0) >> 4;
+
+    if (cpu->registers[vx] != cpu->registers[vy]) {
+        cpu->pc += 2;
+    }
+}
