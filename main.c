@@ -23,14 +23,20 @@ int main(int argc, char** argv) {
     load_font(&cpu);
     load_rom(argv[1], &cpu);
 
-    uint16_t opcode = fetch_opcode(&cpu);
-    cpu.pc += 2;
-    
-    printf("0x%04x", opcode);
-
     SDL_Event e;
     bool running = false;
+    uint16_t opcode;
+
     while(running == false) { 
+        opcode = fetch_opcode(&cpu);
+        cpu.pc += 2;
+    
+        if (opcode == 0x00E0) {
+            clear_screen(&video);
+        }
+
+        printf("0x%04x\n", opcode);
+    
         while(SDL_PollEvent(&e)) {
             if (e.type == SDL_QUIT) {
                 running = true;

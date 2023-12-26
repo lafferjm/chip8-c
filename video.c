@@ -34,3 +34,8 @@ Video init_video() {
     
     return video;
 }
+
+void clear_screen(Video* video) {
+    SDL_FillRect(video->surface, NULL, SDL_MapRGB(video->surface->format, 0x00, 0x00, 0x00));
+    SDL_UpdateWindowSurface(video->window);
+}
