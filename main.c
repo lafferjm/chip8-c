@@ -45,6 +45,9 @@ int main(int argc, char** argv) {
             case 0x7000:
                 add_to_register(&cpu, opcode);
                 break;
+            case 0xA000:
+                set_index_register(&cpu, opcode);
+                break;
         }
 
         printf("0x%04x\n", opcode);

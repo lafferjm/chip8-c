@@ -19,3 +19,8 @@ void add_to_register(CPU* cpu, uint16_t opcode) {
 
     cpu->registers[vx] = cpu->registers[vx] + value;
 }
+
+void set_index_register(CPU* cpu, uint16_t opcode) {
+    uint16_t value = opcode & 0x0FFFu;
+    cpu->index = value;
+}
