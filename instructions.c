@@ -94,3 +94,19 @@ void skip_if_not_equal_registers(CPU* cpu, uint16_t opcode) {
         cpu->pc += 2;
     }
 }
+
+void set_register_x_y(CPU* cpu, uint8_t vx, uint8_t vy) {
+    cpu->registers[vx] = cpu->registers[vy];
+}
+
+void or_register(CPU* cpu, uint8_t vx, uint8_t vy) {
+    cpu->registers[vx] = cpu->registers[vx] | cpu->registers[vy];
+}
+
+void and_register(CPU* cpu, uint8_t vx, uint8_t vy) {
+    cpu->registers[vx] = cpu->registers[vx] & cpu->registers[vy];
+}
+
+void xor_register(CPU* cpu, uint8_t vx, uint8_t vy) {
+    cpu->registers[vx] = cpu->registers[vx] ^ cpu->registers[vy];
+}

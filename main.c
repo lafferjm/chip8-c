@@ -54,6 +54,26 @@ int main(int argc, char** argv) {
             case 0x7000:
                 add_to_register(&cpu, opcode);
                 break;
+            case 0x8000: {
+                uint8_t vx = (opcode & 0x0F00) >> 8;
+                uint8_t vy = (opcode & 0x00F0) >> 4;
+
+                switch (opcode & 0x000F) {
+                    case 0x0:
+                        set_register_x_y(&cpu, vx, vy);
+                        break;
+                    case 0x1:
+                        or_register(&cpu, vx, vy);
+                        break;
+                    case 0x2:
+                        and_register(&cpu, vx, vy);
+                        break;
+                    case 0x3:
+                        xor_register(&cpu, vx, vy);
+                        break;
+                }
+                break;
+            }
             case 0x9000:
                 skip_if_not_equal_registers(&cpu, opcode);
                 break;

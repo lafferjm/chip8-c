@@ -16,4 +16,9 @@ void skip_if_not_equal_value(CPU*, uint16_t);
 void skip_if_equal_registers(CPU*, uint16_t);
 void skip_if_not_equal_registers(CPU*, uint16_t);
 
+void set_register_x_y(CPU*, uint8_t, uint8_t);
+void or_register(CPU*, uint8_t, uint8_t);
+void and_register(CPU*, uint8_t, uint8_t);
+void xor_register(CPU*, uint8_t, uint8_t);
+
 #endif
