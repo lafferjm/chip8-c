@@ -48,7 +48,7 @@ void load_rom(char* rom_name, CPU* cpu) {
     fread(rom_buffer, sizeof(uint8_t), rom_length, fp);
 
     for (int i = 0; i < rom_length; i++) {
-        cpu->memory[i + 0x200] = rom_buffer[i];
+        cpu->memory[i + cpu->pc] = rom_buffer[i];
     }
 
     fclose(fp);
