@@ -7,6 +7,7 @@
 
 #include "chip8.h"
 #include "cpu.h"
+#include "instructions.h"
 #include "video.h"
 
 int main(int argc, char** argv) {
@@ -31,8 +32,16 @@ int main(int argc, char** argv) {
         opcode = fetch_opcode(&cpu);
         cpu.pc += 2;
     
-        if (opcode == 0x00E0) {
-            clear_screen(&video);
+        switch (opcode & 0xF000) {
+            case 0x0000:
+                clear_screen(&video);
+                break;
+            case 0x1000:
+                jump(&cpu, opcode);
+                break;
+            case 0x6000:
+                set_register(&cpu, opcode);
+                break;
         }
 
         printf("0x%04x\n", opcode);

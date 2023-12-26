@@ -5,6 +5,7 @@
 
 typedef struct cpu {
     uint8_t memory[4096];
+    uint8_t registers[16];
     uint32_t display[64*32];
     uint16_t pc;
     uint16_t index;
