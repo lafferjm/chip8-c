@@ -9,11 +9,16 @@
 #include "cpu.h"
 
 int main(int argc, char** argv) {
+    if (argc < 2) {
+        printf("Incorrect usage: chip8 <ROM>\n");
+        exit(-1);
+    }
+
     CPU cpu;
     cpu.pc = 0x200;
 
     load_font(&cpu);
-    load_rom("roms/ibm_logo.ch8", &cpu);
+    load_rom(argv[1], &cpu);
 
     uint16_t opcode = (cpu.memory[cpu.pc] << 8) | cpu.memory[cpu.pc + 1];
     cpu.pc += 2;
