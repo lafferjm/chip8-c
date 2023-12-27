@@ -152,6 +152,7 @@ int main(int argc, char** argv) {
         }
     }
 
+    SDL_DestroyRenderer(video.renderer);
     SDL_DestroyWindow(video.window);
     SDL_Quit();
     
