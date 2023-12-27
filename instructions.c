@@ -8,7 +8,7 @@ void clear_screen(Video* video) {
 }
 
 void jump(CPU* cpu, uint16_t opcode) {
-    uint16_t address = opcode & 0x0FFFu;
+    uint16_t address = opcode & 0x0FFF;
     cpu->pc = address;
 }
 
@@ -27,7 +27,7 @@ void add_to_register(CPU* cpu, uint16_t opcode) {
 }
 
 void set_index_register(CPU* cpu, uint16_t opcode) {
-    uint16_t value = opcode & 0x0FFFu;
+    uint16_t value = opcode & 0x0FFF;
     cpu->index = value;
 }
 
