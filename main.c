@@ -49,7 +49,6 @@ int main(int argc, char** argv) {
                 case 0x0000: {
                     switch (opcode & 0x00FF) {
                         case 0x00E0:
-                            printf("CLEARING SCREEN\n");
                             clear_screen(&video);
                             break;
                         case 0x00EE:
@@ -135,6 +134,9 @@ int main(int argc, char** argv) {
                             break;
                         case 0x0033:
                             decimal_encoded_conversion(&cpu, x);
+                            break;
+                        case 0x001E:
+                            add_to_index(&cpu, x);
                             break;
                     }
                     break;

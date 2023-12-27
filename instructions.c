@@ -179,3 +179,7 @@ void decimal_encoded_conversion(CPU* cpu, uint8_t vx) {
     cpu->memory[cpu->index + 1] = tens;
     cpu->memory[cpu->index + 2] = ones;
 }
+
+void add_to_index(CPU* cpu, uint8_t vx) {
+    cpu->index = cpu->registers[vx] + cpu->index;
+}
