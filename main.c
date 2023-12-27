@@ -56,7 +56,7 @@ int main(int argc, char **argv)
                 switch (opcode & 0x00FF)
                 {
                 case 0x00E0:
-                    clear_screen(&video);
+                    clear_screen(&cpu, &video);
                     break;
                 case 0x00EE:
                     return_from_subroutine(&cpu, opcode);
@@ -173,6 +173,9 @@ int main(int argc, char **argv)
                     break;
                 case 0x001E:
                     add_to_index(&cpu, x);
+                    break;
+                case 0x000A:
+                    wait_for_key(&cpu, x);
                     break;
                 }
                 break;

@@ -4,7 +4,7 @@
 #include "video.h"
 #include "cpu.h"
 
-void clear_screen(Video*);
+void clear_screen(CPU*, Video*);
 void jump(CPU*, uint16_t);
 void set_register(CPU*, uint16_t);
 void add_to_register(CPU*, uint16_t);
@@ -46,5 +46,6 @@ void set_sound_timer(CPU*, uint8_t);
 
 void skip_if_key_down(CPU*, uint16_t);
 void skip_if_key_up(CPU*, uint16_t);
+void wait_for_key(CPU*, uint8_t);
 
 #endif

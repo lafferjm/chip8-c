@@ -2,7 +2,8 @@
 #include "instructions.h"
 #include "video.h"
 
-void clear_screen(Video* video) {
+void clear_screen(CPU* cpu, Video* video) {
+    memset(cpu->display, 0, sizeof(cpu->display));
     SDL_SetRenderDrawColor(video->renderer, 00, 0x00, 0x00, 0xFF);
     SDL_RenderClear(video->renderer);
 }
@@ -225,5 +226,43 @@ void skip_if_key_up(CPU* cpu, uint16_t opcode) {
 
     if (!cpu->keypad[cpu->registers[vx]]) {
         cpu->pc = cpu->pc + 2;
+    }
+}
+
+void wait_for_key(CPU* cpu, uint8_t vx) {
+    if (cpu->keypad[0]) {
+        cpu->registers[vx] = 0;
+    } else if (cpu->keypad[1]) {
+        cpu->registers[vx] = 1;
+    } else if (cpu->keypad[2]) {
+        cpu->registers[vx] = 2;
+    } else if (cpu->keypad[3]) {
+        cpu->registers[vx] = 3;
+    } else if (cpu->keypad[4]) {
+        cpu->registers[vx] = 4;
+    } else if (cpu->keypad[5]) {
+        cpu->registers[vx] = 5;
+    } else if (cpu->keypad[6]) {
+        cpu->registers[vx] = 6;
+    } else if (cpu->keypad[7]) {
+        cpu->registers[vx] = 7;
+    } else if (cpu->keypad[8]) {
+        cpu->registers[vx] = 8;
+    } else if (cpu->keypad[9]) {
+        cpu->registers[vx] = 9;
+    } else if (cpu->keypad[10]) {
+        cpu->registers[vx] = 10;
+    } else if (cpu->keypad[11]) {
+        cpu->registers[vx] = 11;
+    } else if (cpu->keypad[12]) {
+        cpu->registers[vx]  = 12;
+    } else if (cpu->keypad[13]) {
+        cpu->registers[vx] =  13;
+    } else if (cpu->keypad[14]) {
+        cpu->registers[vx] = 14;
+    } else if (cpu->keypad[15]) {
+        cpu->registers[vx] = 15;
+    } else {
+        cpu->pc = cpu->pc - 2;
     }
 }
