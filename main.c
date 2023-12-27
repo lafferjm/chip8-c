@@ -128,12 +128,13 @@ int main(int argc, char** argv) {
                     uint8_t x = (opcode & 0x0F00) >> 8;
                     switch (opcode & 0x00FF) {
                         case 0x0055:
-                            printf("AM I STORING MEMORY\n");
                             store_memory(&cpu, x);
                             break;
                         case 0x0065:
-                            printf("AM I LOADING MEMORY\n");
                             load_memory(&cpu, x);
+                            break;
+                        case 0x0033:
+                            decimal_encoded_conversion(&cpu, x);
                             break;
                     }
                     break;

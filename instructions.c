@@ -143,13 +143,13 @@ void shift_right(CPU* cpu, uint8_t vx) {
 }
 
 void load_memory(CPU* cpu, uint8_t x) {
-    for (int i = 0; i < x; i++) {
+    for (int i = 0; i < x + 1; i++) {
         cpu->registers[i] = cpu->memory[cpu->index + i];
     }
 }
 
 void store_memory(CPU* cpu, uint8_t x) {
-    for (int i = 0; i < x; i++) {
+    for (int i = 0; i < x + 1; i++) {
         cpu->memory[cpu->index + i] = cpu->registers[i];
     }
 }
@@ -166,4 +166,16 @@ void call_subroutine(CPU* cpu, uint16_t opcode) {
 void return_from_subroutine(CPU* cpu, uint16_t opcode) {
     cpu->pc = cpu->stack[cpu->sp - 1];
     cpu->sp -= 1;
+}
+
+void decimal_encoded_conversion(CPU* cpu, uint8_t vx) {
+    uint8_t value = cpu->registers[vx];
+
+    unsigned short ones = value % 10;
+    unsigned short tens = (value / 10) % 10;
+    unsigned short hundreds = (value / 100) % 10;
+
+    cpu->memory[cpu->index] = hundreds;
+    cpu->memory[cpu->index + 1] = tens;
+    cpu->memory[cpu->index + 2] = ones;
 }

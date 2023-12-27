@@ -31,4 +31,7 @@ void store_memory(CPU*, uint8_t);
 
 void call_subroutine(CPU*, uint16_t);
 void return_from_subroutine(CPU*, uint16_t);
+
+void decimal_encoded_conversion(CPU*, uint8_t);
+
 #endif
