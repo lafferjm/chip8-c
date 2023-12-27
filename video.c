@@ -55,10 +55,10 @@ void update_display(Video* video, uint32_t* display) {
                 rect.y = y * 16;
                 rect.w = 16;
                 rect.h = 16;
-            }
 
-            SDL_SetRenderDrawColor(video->renderer, 0xFF, 0xFF, 0xFF, 0xFF);
-            SDL_RenderFillRect(video->renderer, &rect);
+                SDL_SetRenderDrawColor(video->renderer, 0xFF, 0xFF, 0xFF, 0xFF);
+                SDL_RenderFillRect(video->renderer, &rect);
+            }
         }
     }
 
