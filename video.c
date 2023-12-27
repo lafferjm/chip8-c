@@ -36,7 +36,7 @@ Video init_video() {
         exit(-1);
     }
 
-    SDL_SetRenderDrawColor(video.renderer, 00, 0x00, 0x00, 0xFF);
+    SDL_SetRenderDrawColor(video.renderer, 0x00, 0x00, 0x00, 0xFF);
     SDL_RenderClear(video.renderer);
 
     return video;
@@ -44,6 +44,9 @@ Video init_video() {
 
 void update_display(Video* video, uint32_t* display) {
     SDL_Rect rect;
+
+    SDL_SetRenderDrawColor(video->renderer, 0x00, 0x00, 0x00, 0xFF);
+    SDL_RenderClear(video->renderer);
 
     for (unsigned int x = 0; x < 64; x++) {
         for (unsigned int y = 0; y < 32; y++) {
