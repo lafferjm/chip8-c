@@ -26,4 +26,7 @@ void subtract_registers(CPU*, uint8_t, uint8_t, uint8_t);
 void shift_left(CPU*, uint8_t);
 void shift_right(CPU*, uint8_t);
 
+void load_memory(CPU*, uint8_t);
+void store_memory(CPU*, uint8_t);
+
 #endif

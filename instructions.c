@@ -141,3 +141,15 @@ void shift_right(CPU* cpu, uint8_t vx) {
     cpu->registers[0xF] = cpu->registers[vx] & 0x1;
     cpu->registers[vx] = cpu->registers[vx] >> 1;
 }
+
+void load_memory(CPU* cpu, uint8_t x) {
+    for (int i = 0; i < x; i++) {
+        cpu->registers[i] = cpu->memory[cpu->index + i];
+    }
+}
+
+void store_memory(CPU* cpu, uint8_t x) {
+    for (int i = 0; i < x; i++) {
+        cpu->memory[cpu->index + i] = cpu->registers[i];
+    }
+}

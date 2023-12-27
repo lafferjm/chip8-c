@@ -112,6 +112,18 @@ int main(int argc, char** argv) {
                     display(&cpu, opcode);
                     update_display(&video, cpu.display);
                     break;
+                case 0xF000: {
+                    uint8_t x = (opcode & 0x0F00) >> 8;
+                    switch (opcode & 0x00FF) {
+                        case 0x0055:
+                            store_memory(&cpu, x);
+                            break;
+                        case 0x0065:
+                            load_memory(&cpu, x);
+                            break;
+                    }
+                    break;
+                }
             }
         
             while(SDL_PollEvent(&e)) {
