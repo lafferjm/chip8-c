@@ -29,4 +29,6 @@ void shift_right(CPU*, uint8_t);
 void load_memory(CPU*, uint8_t);
 void store_memory(CPU*, uint8_t);
 
+void call_subroutine(CPU*, uint16_t);
+void return_from_subroutine(CPU*, uint16_t);
 #endif

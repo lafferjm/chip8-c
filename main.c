@@ -46,11 +46,23 @@ int main(int argc, char** argv) {
             cpu.pc += 2;
 
             switch (opcode & 0xF000) {
-                case 0x0000:
-                    clear_screen(&video);
+                case 0x0000: {
+                    switch (opcode & 0x00FF) {
+                        case 0x00E0:
+                            printf("CLEARING SCREEN\n");
+                            clear_screen(&video);
+                            break;
+                        case 0x00EE:
+                            return_from_subroutine(&cpu, opcode);
+                            break;
+                    }
                     break;
+                }
                 case 0x1000:
                     jump(&cpu, opcode);
+                    break;
+                case 0x2000:
+                    call_subroutine(&cpu, opcode);
                     break;
                 case 0x3000:
                     skip_if_equal_value(&cpu, opcode);
@@ -116,14 +128,19 @@ int main(int argc, char** argv) {
                     uint8_t x = (opcode & 0x0F00) >> 8;
                     switch (opcode & 0x00FF) {
                         case 0x0055:
+                            printf("AM I STORING MEMORY\n");
                             store_memory(&cpu, x);
                             break;
                         case 0x0065:
+                            printf("AM I LOADING MEMORY\n");
                             load_memory(&cpu, x);
                             break;
                     }
                     break;
                 }
+                default:
+                    printf("UNKNOWN OPCODE: %04x\n", opcode);
+                    break;
             }
         
             while(SDL_PollEvent(&e)) {

@@ -27,7 +27,7 @@ void add_to_register(CPU* cpu, uint16_t opcode) {
 }
 
 void set_index_register(CPU* cpu, uint16_t opcode) {
-    uint16_t value = opcode & 0x0FFF;
+    uint16_t value = opcode & 0x0FFFu;
     cpu->index = value;
 }
 
@@ -152,4 +152,18 @@ void store_memory(CPU* cpu, uint8_t x) {
     for (int i = 0; i < x; i++) {
         cpu->memory[cpu->index + i] = cpu->registers[i];
     }
+}
+
+void call_subroutine(CPU* cpu, uint16_t opcode) {
+    uint16_t location = opcode & 0x0FFF;
+
+    cpu->stack[cpu->sp] = cpu->pc;
+    cpu->sp += 1;
+
+    cpu->pc = location;
+}
+
+void return_from_subroutine(CPU* cpu, uint16_t opcode) {
+    cpu->pc = cpu->stack[cpu->sp - 1];
+    cpu->sp -= 1;
 }

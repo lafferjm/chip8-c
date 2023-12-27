@@ -13,5 +13,6 @@ void init_cpu(CPU* cpu) {
     memset(cpu->display, 0, sizeof(cpu->display));
     memset(cpu->stack, 0, sizeof(cpu->stack));
 
+    cpu->sp = 0;
     cpu->pc = 0x200;
 }
