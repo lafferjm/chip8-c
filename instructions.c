@@ -211,3 +211,19 @@ void set_delay_timer(CPU* cpu, uint8_t vx) {
 void set_sound_timer(CPU* cpu, uint8_t vx) {
     cpu->sound_timer = cpu->registers[vx];
 }
+
+void skip_if_key_down(CPU* cpu, uint16_t opcode) {
+    uint8_t vx = (opcode & 0x0F00) >> 8;
+
+    if (cpu->keypad[cpu->registers[vx]]) {
+        cpu->pc = cpu->pc + 2;
+    }
+}
+
+void skip_if_key_up(CPU* cpu, uint16_t opcode) {
+    uint8_t vx = (opcode & 0x0F00) >> 8;
+
+    if (!cpu->keypad[cpu->registers[vx]]) {
+        cpu->pc = cpu->pc + 2;
+    }
+}

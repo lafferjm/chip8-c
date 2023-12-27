@@ -13,6 +13,7 @@ typedef struct cpu {
     uint8_t sp;
     uint8_t delay_timer;
     uint8_t sound_timer;
+    uint8_t keypad[16];
 } CPU;
 
 uint16_t fetch_opcode(CPU*);

@@ -44,4 +44,7 @@ void store_delay_timer(CPU*, uint8_t);
 void set_delay_timer(CPU*, uint8_t);
 void set_sound_timer(CPU*, uint8_t);
 
+void skip_if_key_down(CPU*, uint16_t);
+void skip_if_key_up(CPU*, uint16_t);
+
 #endif

@@ -12,6 +12,7 @@ void init_cpu(CPU* cpu) {
     memset(cpu->registers, 0, sizeof(cpu->registers));
     memset(cpu->display, 0, sizeof(cpu->display));
     memset(cpu->stack, 0, sizeof(cpu->stack));
+    memset(cpu->keypad, 0, sizeof(cpu->keypad));
 
     cpu->sp = 0;
     cpu->pc = 0x200;
