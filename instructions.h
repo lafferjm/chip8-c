@@ -38,4 +38,6 @@ void add_to_index(CPU*, uint8_t);
 
 void jump_with_offset(CPU*, uint16_t);
 
+void generate_random(CPU*, uint16_t);
+
 #endif

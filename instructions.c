@@ -188,3 +188,14 @@ void jump_with_offset(CPU* cpu, uint16_t opcode) {
     uint16_t location = opcode & 0x0FFF;
     cpu->pc = cpu->registers[0] + location;
 }
+
+void generate_random(CPU* cpu, uint16_t opcode) {
+    uint8_t vx = (opcode & 0x0F00) >> 8;
+    uint8_t upper_limit = opcode & 0x00FF;
+
+    srand(time(NULL));
+
+    uint8_t random_number = rand() % upper_limit;
+
+    cpu->registers[vx] = random_number & upper_limit;
+}
