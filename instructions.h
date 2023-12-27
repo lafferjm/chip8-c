@@ -21,4 +21,9 @@ void or_register(CPU*, uint8_t, uint8_t);
 void and_register(CPU*, uint8_t, uint8_t);
 void xor_register(CPU*, uint8_t, uint8_t);
 
+void add_registers(CPU*, uint8_t, uint8_t);
+void subtract_registers(CPU*, uint8_t, uint8_t, uint8_t);
+void shift_left(CPU*, uint8_t);
+void shift_right(CPU*, uint8_t);
+
 #endif

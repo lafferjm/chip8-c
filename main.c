@@ -71,6 +71,21 @@ int main(int argc, char** argv) {
                     case 0x3:
                         xor_register(&cpu, vx, vy);
                         break;
+                    case 0x4:
+                        add_registers(&cpu, vx, vy);
+                        break;
+                    case 0x5:
+                        subtract_registers(&cpu, vx, vy, vx);
+                        break;
+                    case 0x6:
+                        shift_right(&cpu, vx);
+                        break;
+                    case 0x7:
+                        subtract_registers(&cpu, vy, vx, vx);
+                        break;
+                    case 0xE:
+                        shift_left(&cpu, vx);
+                        break;
                 }
                 break;
             }

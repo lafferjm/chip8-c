@@ -110,3 +110,34 @@ void and_register(CPU* cpu, uint8_t vx, uint8_t vy) {
 void xor_register(CPU* cpu, uint8_t vx, uint8_t vy) {
     cpu->registers[vx] = cpu->registers[vx] ^ cpu->registers[vy];
 }
+
+void add_registers(CPU* cpu, uint8_t vx, uint8_t vy) {
+    uint16_t sum = cpu->registers[vx] + cpu->registers[vy];
+    if (sum > 255) {
+        cpu->registers[0xF] = 1;
+    } else {
+        cpu->registers[0xF] = 0;
+    }
+
+    cpu->registers[vx] = sum & 0xFF;
+}
+
+void subtract_registers(CPU* cpu, uint8_t first, uint8_t second, uint8_t vx) {
+    if (cpu->registers[first] > cpu->registers[second]) {
+        cpu->registers[0xF] = 1;
+    } else {
+        cpu->registers[0xF] = 0;
+    }
+
+    cpu->registers[vx] = cpu->registers[first] - cpu->registers[second];
+}
+
+void shift_left(CPU* cpu, uint8_t vx) {
+    cpu->registers[0xF] = (cpu->registers[vx] & 0x80) >> 7;
+    cpu->registers[vx] = cpu->registers[vx] << 1;
+}
+
+void shift_right(CPU* cpu, uint8_t vx) {
+    cpu->registers[0xF] = cpu->registers[vx] & 0x1;
+    cpu->registers[vx] = cpu->registers[vx] >> 1;
+}
