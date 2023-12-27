@@ -119,6 +119,9 @@ int main(int argc, char** argv) {
                 case 0xA000:
                     set_index_register(&cpu, opcode);
                     break;
+                case 0xB000:
+                    jump_with_offset(&cpu, opcode);
+                    break;
                 case 0xD000:
                     display(&cpu, opcode);
                     update_display(&video, cpu.display);

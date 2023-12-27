@@ -183,3 +183,8 @@ void decimal_encoded_conversion(CPU* cpu, uint8_t vx) {
 void add_to_index(CPU* cpu, uint8_t vx) {
     cpu->index = cpu->registers[vx] + cpu->index;
 }
+
+void jump_with_offset(CPU* cpu, uint16_t opcode) {
+    uint16_t location = opcode & 0x0FFF;
+    cpu->pc = cpu->registers[0] + location;
+}
