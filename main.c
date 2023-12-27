@@ -132,6 +132,15 @@ int main(int argc, char** argv) {
                 case 0xF000: {
                     uint8_t x = (opcode & 0x0F00) >> 8;
                     switch (opcode & 0x00FF) {
+                        case 0x0007:
+                            store_delay_timer(&cpu, x);
+                            break;
+                        case 0x0015:
+                            set_delay_timer(&cpu, x);
+                            break;
+                        case 0x0018:
+                            set_sound_timer(&cpu, x);
+                            break;
                         case 0x0055:
                             store_memory(&cpu, x);
                             break;
@@ -156,6 +165,14 @@ int main(int argc, char** argv) {
                 if (e.type == SDL_QUIT) {
                     running = true;
                 }
+            }
+
+            if (cpu.delay_timer > 0) {
+                cpu.delay_timer = cpu.delay_timer - 1;
+            }
+
+            if (cpu.sound_timer > 0) {
+                cpu.sound_timer = cpu.sound_timer - 1;
             }
         }
     }

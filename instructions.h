@@ -40,4 +40,8 @@ void jump_with_offset(CPU*, uint16_t);
 
 void generate_random(CPU*, uint16_t);
 
+void store_delay_timer(CPU*, uint8_t);
+void set_delay_timer(CPU*, uint8_t);
+void set_sound_timer(CPU*, uint8_t);
+
 #endif

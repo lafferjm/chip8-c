@@ -199,3 +199,15 @@ void generate_random(CPU* cpu, uint16_t opcode) {
 
     cpu->registers[vx] = random_number & upper_limit;
 }
+
+void store_delay_timer(CPU* cpu, uint8_t vx) {
+    cpu->registers[vx] = cpu->delay_timer;
+}
+
+void set_delay_timer(CPU* cpu, uint8_t vx) {
+    cpu->delay_timer = cpu->registers[vx];
+}
+
+void set_sound_timer(CPU* cpu, uint8_t vx) {
+    cpu->sound_timer = cpu->registers[vx];
+}
